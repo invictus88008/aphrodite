@@ -62,19 +62,19 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
+	
 	var _generate = __webpack_require__(2);
-
+	
 	var _exports2 = __webpack_require__(28);
-
+	
 	var _exports3 = _interopRequireDefault(_exports2);
-
+	
 	var useImportant = true; // Add !important to all style definitions
 	exports['default'] = (0, _exports3['default'])(useImportant, _generate.defaultSelectorHandlers);
 	module.exports = exports['default'];
@@ -84,31 +84,31 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
-
+	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
+	
 	var _inlineStylePrefixerStaticCreatePrefixer = __webpack_require__(3);
-
+	
 	var _inlineStylePrefixerStaticCreatePrefixer2 = _interopRequireDefault(_inlineStylePrefixerStaticCreatePrefixer);
-
+	
 	var _libStaticPrefixData = __webpack_require__(9);
-
+	
 	var _libStaticPrefixData2 = _interopRequireDefault(_libStaticPrefixData);
-
+	
 	var _orderedElements = __webpack_require__(25);
-
+	
 	var _orderedElements2 = _interopRequireDefault(_orderedElements);
-
+	
 	var _util = __webpack_require__(26);
-
+	
 	var prefixAll = (0, _inlineStylePrefixerStaticCreatePrefixer2['default'])(_libStaticPrefixData2['default']);
-
+	
 	/* ::
 	import type { SheetDefinition } from './index.js';
 	type StringHandlers = { [id:string]: Function };
@@ -119,7 +119,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    callback: SelectorCallback
 	) => string | null;
 	*/
-
+	
 	/**
 	 * `selectorHandlers` are functions which handle special selectors which act
 	 * differently than normal style definitions. These functions look at the
@@ -179,7 +179,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    return generateSubtreeStyles(baseSelector + selector);
 	},
-
+	
 	// Handle media queries (or font-faces)
 	function mediaQueries(selector, /* : string */
 	baseSelector, /* : string */
@@ -192,7 +192,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var generated = generateSubtreeStyles(baseSelector);
 	    return selector + '{' + generated + '}';
 	}];
-
+	
 	exports.defaultSelectorHandlers = defaultSelectorHandlers;
 	/**
 	 * Generate CSS for a selector and some styles.
@@ -244,14 +244,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	useImportant /* : boolean */
 	) /* : string */{
 	    var merged = new _orderedElements2['default']();
-
+	
 	    for (var i = 0; i < styleTypes.length; i++) {
 	        merged.addStyleType(styleTypes[i]);
 	    }
-
+	
 	    var plainDeclarations = new _orderedElements2['default']();
 	    var generatedStyles = "";
-
+	
 	    // TODO(emily): benchmark this to see if a plain for loop would be faster.
 	    merged.forEach(function (val, key) {
 	        // For each key, see if one of the selector handlers will handle these
@@ -273,10 +273,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            plainDeclarations.set(key, val);
 	        }
 	    });
-
+	
 	    return generateCSSRuleset(selector, plainDeclarations, stringHandlers, useImportant, selectorHandlers) + generatedStyles;
 	};
-
+	
 	exports.generateCSS = generateCSS;
 	/**
 	 * Helper method of generateCSSRuleset to facilitate custom handling of certain
@@ -291,7 +291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (!stringHandlers) {
 	        return declarations;
 	    }
-
+	
 	    var stringHandlerKeys = Object.keys(stringHandlers);
 	    for (var i = 0; i < stringHandlerKeys.length; i++) {
 	        var key = stringHandlerKeys[i];
@@ -308,10 +308,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            declarations.set(key, stringHandlers[key](declarations.get(key), selectorHandlers));
 	        }
 	    }
-
+	
 	    return declarations;
 	};
-
+	
 	var transformRule = function transformRule(key, /* : string */
 	value, /* : string */
 	transformValue /* : function */
@@ -319,7 +319,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return (/* : string */(0, _util.kebabifyStyleName)(key) + ':' + transformValue(key, value) + ';'
 	    );
 	};
-
+	
 	/**
 	 * Generate a CSS ruleset with the selector and containing the declarations.
 	 *
@@ -359,12 +359,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	) /* : string */{
 	    // Mutates declarations
 	    runStringHandlers(declarations, stringHandlers, selectorHandlers);
-
+	
 	    var originalElements = _extends({}, declarations.elements);
-
+	
 	    // NOTE(emily): This mutates handledDeclarations.elements.
 	    var prefixedElements = prefixAll(declarations.elements);
-
+	
 	    var elementNames = Object.keys(prefixedElements);
 	    if (elementNames.length !== declarations.keyOrder.length) {
 	        // There are some prefixed values, so we need to figure out how to sort
@@ -393,7 +393,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    // This is a Ms-prefixed style, like "MsTransition".
 	                    originalStyle = elementNames[i][2].toLowerCase() + elementNames[i].slice(3);
 	                }
-
+	
 	                if (originalStyle && originalElements.hasOwnProperty(originalStyle)) {
 	                    var originalIndex = declarations.keyOrder.indexOf(originalStyle);
 	                    declarations.keyOrder.splice(originalIndex, 0, elementNames[i]);
@@ -406,9 +406,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }
-
+	
 	    var transformValue = useImportant === false ? _util.stringifyValue : _util.stringifyAndImportantifyValue;
-
+	
 	    var rules = [];
 	    for (var i = 0; i < declarations.keyOrder.length; i++) {
 	        var key = declarations.keyOrder[i];
@@ -424,7 +424,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            rules.push(transformRule(key, value, transformValue));
 	        }
 	    }
-
+	
 	    if (rules.length) {
 	        return selector + '{' + rules.join("") + '}';
 	    } else {
@@ -438,50 +438,50 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = createPrefixer;
-
+	
 	var _prefixProperty = __webpack_require__(4);
-
+	
 	var _prefixProperty2 = _interopRequireDefault(_prefixProperty);
-
+	
 	var _prefixValue = __webpack_require__(6);
-
+	
 	var _prefixValue2 = _interopRequireDefault(_prefixValue);
-
+	
 	var _addNewValuesOnly = __webpack_require__(7);
-
+	
 	var _addNewValuesOnly2 = _interopRequireDefault(_addNewValuesOnly);
-
+	
 	var _isObject = __webpack_require__(8);
-
+	
 	var _isObject2 = _interopRequireDefault(_isObject);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function createPrefixer(_ref) {
 	  var prefixMap = _ref.prefixMap,
 	      plugins = _ref.plugins;
-
+	
 	  function prefixAll(style) {
 	    for (var property in style) {
 	      var value = style[property];
-
+	
 	      // handle nested objects
 	      if ((0, _isObject2.default)(value)) {
 	        style[property] = prefixAll(value);
 	        // handle array values
 	      } else if (Array.isArray(value)) {
 	        var combinedValue = [];
-
+	
 	        for (var i = 0, len = value.length; i < len; ++i) {
 	          var processedValue = (0, _prefixValue2.default)(plugins, property, value[i], style, prefixMap);
 	          (0, _addNewValuesOnly2.default)(combinedValue, processedValue || value[i]);
 	        }
-
+	
 	        // only modify the value if it was touched
 	        // by any plugin to prevent unnecessary mutations
 	        if (combinedValue.length > 0) {
@@ -489,20 +489,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      } else {
 	        var _processedValue = (0, _prefixValue2.default)(plugins, property, value, style, prefixMap);
-
+	
 	        // only modify the value if it was touched
 	        // by any plugin to prevent unnecessary mutations
 	        if (_processedValue) {
 	          style[property] = _processedValue;
 	        }
-
+	
 	        (0, _prefixProperty2.default)(prefixMap, property, style);
 	      }
 	    }
-
+	
 	    return style;
 	  }
-
+	
 	  return prefixAll;
 	}
 	module.exports = exports['default'];
@@ -512,18 +512,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = prefixProperty;
-
+	
 	var _capitalizeString = __webpack_require__(5);
-
+	
 	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function prefixProperty(prefixProperties, property, style) {
 	  if (prefixProperties.hasOwnProperty(property)) {
 	    var requiredPrefixes = prefixProperties[property];
@@ -539,7 +539,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	"use strict";
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -554,7 +554,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	"use strict";
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -562,7 +562,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function prefixValue(plugins, property, value, style, metaData) {
 	  for (var i = 0, len = plugins.length; i < len; ++i) {
 	    var processedValue = plugins[i](property, value, style, metaData);
-
+	
 	    // we can stop processing if a value is returned
 	    // as all plugin criteria are unique
 	    if (processedValue) {
@@ -577,7 +577,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	"use strict";
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -587,7 +587,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    list.push(value);
 	  }
 	}
-
+	
 	function addNewValuesOnly(list, values) {
 	  if (Array.isArray(values)) {
 	    for (var i = 0, len = values.length; i < len; ++i) {
@@ -604,7 +604,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	"use strict";
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -630,10 +630,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	var position = __webpack_require__(20)
 	var sizing = __webpack_require__(21)
 	var transition = __webpack_require__(22)
-
+	var w = ["Webkit"];
+	var m = ["Moz"];
+	var ms = ["ms"];
+	var wm = ["Webkit","Moz"];
+	var wms = ["Webkit","ms"];
+	var wmms = ["Webkit","Moz","ms"];
+	
 	module.exports =  {
 	  plugins: [calc,crossFade,cursor,filter,flex,flexboxIE,flexboxOld,gradient,imageSet,position,sizing,transition],
-	  prefixMap: {"transform":["Webkit","ms"],"transformOrigin":["Webkit","ms"],"transformOriginX":["Webkit","ms"],"transformOriginY":["Webkit","ms"],"backfaceVisibility":["Webkit"],"perspective":["Webkit"],"perspectiveOrigin":["Webkit"],"transformStyle":["Webkit"],"transformOriginZ":["Webkit"],"animation":["Webkit"],"animationDelay":["Webkit"],"animationDirection":["Webkit"],"animationFillMode":["Webkit"],"animationDuration":["Webkit"],"animationIterationCount":["Webkit"],"animationName":["Webkit"],"animationPlayState":["Webkit"],"animationTimingFunction":["Webkit"],"appearance":["Webkit","Moz"],"userSelect":["Webkit","Moz","ms"],"fontKerning":["Webkit"],"textEmphasisPosition":["Webkit"],"textEmphasis":["Webkit"],"textEmphasisStyle":["Webkit"],"textEmphasisColor":["Webkit"],"boxDecorationBreak":["Webkit"],"clipPath":["Webkit"],"maskImage":["Webkit"],"maskMode":["Webkit"],"maskRepeat":["Webkit"],"maskPosition":["Webkit"],"maskClip":["Webkit"],"maskOrigin":["Webkit"],"maskSize":["Webkit"],"maskComposite":["Webkit"],"mask":["Webkit"],"maskBorderSource":["Webkit"],"maskBorderMode":["Webkit"],"maskBorderSlice":["Webkit"],"maskBorderWidth":["Webkit"],"maskBorderOutset":["Webkit"],"maskBorderRepeat":["Webkit"],"maskBorder":["Webkit"],"maskType":["Webkit"],"textDecorationStyle":["Webkit","Moz"],"textDecorationSkip":["Webkit","Moz"],"textDecorationLine":["Webkit","Moz"],"textDecorationColor":["Webkit","Moz"],"filter":["Webkit"],"fontFeatureSettings":["Webkit","Moz"],"breakAfter":["Webkit","Moz","ms"],"breakBefore":["Webkit","Moz","ms"],"breakInside":["Webkit","Moz","ms"],"columnCount":["Webkit","Moz"],"columnFill":["Webkit","Moz"],"columnGap":["Webkit","Moz"],"columnRule":["Webkit","Moz"],"columnRuleColor":["Webkit","Moz"],"columnRuleStyle":["Webkit","Moz"],"columnRuleWidth":["Webkit","Moz"],"columns":["Webkit","Moz"],"columnSpan":["Webkit","Moz"],"columnWidth":["Webkit","Moz"],"flex":["Webkit","ms"],"flexBasis":["Webkit"],"flexDirection":["Webkit","ms"],"flexGrow":["Webkit"],"flexFlow":["Webkit","ms"],"flexShrink":["Webkit"],"flexWrap":["Webkit","ms"],"alignContent":["Webkit"],"alignItems":["Webkit"],"alignSelf":["Webkit"],"justifyContent":["Webkit"],"order":["Webkit"],"transitionDelay":["Webkit"],"transitionDuration":["Webkit"],"transitionProperty":["Webkit"],"transitionTimingFunction":["Webkit"],"backdropFilter":["Webkit"],"scrollSnapType":["Webkit","ms"],"scrollSnapPointsX":["Webkit","ms"],"scrollSnapPointsY":["Webkit","ms"],"scrollSnapDestination":["Webkit","ms"],"scrollSnapCoordinate":["Webkit","ms"],"shapeImageThreshold":["Webkit"],"shapeImageMargin":["Webkit"],"shapeImageOutside":["Webkit"],"hyphens":["Webkit","Moz","ms"],"flowInto":["Webkit","ms"],"flowFrom":["Webkit","ms"],"regionFragment":["Webkit","ms"],"boxSizing":["Moz"],"textAlignLast":["Moz"],"tabSize":["Moz"],"wrapFlow":["ms"],"wrapThrough":["ms"],"wrapMargin":["ms"],"touchAction":["ms"],"gridTemplateColumns":["ms"],"gridTemplateRows":["ms"],"gridTemplateAreas":["ms"],"gridTemplate":["ms"],"gridAutoColumns":["ms"],"gridAutoRows":["ms"],"gridAutoFlow":["ms"],"grid":["ms"],"gridRowStart":["ms"],"gridColumnStart":["ms"],"gridRowEnd":["ms"],"gridRow":["ms"],"gridColumn":["ms"],"gridColumnEnd":["ms"],"gridColumnGap":["ms"],"gridRowGap":["ms"],"gridArea":["ms"],"gridGap":["ms"],"textSizeAdjust":["Webkit","ms"],"borderImage":["Webkit"],"borderImageOutset":["Webkit"],"borderImageRepeat":["Webkit"],"borderImageSlice":["Webkit"],"borderImageSource":["Webkit"],"borderImageWidth":["Webkit"]}
+	  prefixMap: {"transform":wms,"transformOrigin":wms,"transformOriginX":wms,"transformOriginY":wms,"backfaceVisibility":w,"perspective":w,"perspectiveOrigin":w,"transformStyle":w,"transformOriginZ":w,"animation":w,"animationDelay":w,"animationDirection":w,"animationFillMode":w,"animationDuration":w,"animationIterationCount":w,"animationName":w,"animationPlayState":w,"animationTimingFunction":w,"appearance":wm,"userSelect":wmms,"fontKerning":w,"textEmphasisPosition":w,"textEmphasis":w,"textEmphasisStyle":w,"textEmphasisColor":w,"boxDecorationBreak":w,"clipPath":w,"maskImage":w,"maskMode":w,"maskRepeat":w,"maskPosition":w,"maskClip":w,"maskOrigin":w,"maskSize":w,"maskComposite":w,"mask":w,"maskBorderSource":w,"maskBorderMode":w,"maskBorderSlice":w,"maskBorderWidth":w,"maskBorderOutset":w,"maskBorderRepeat":w,"maskBorder":w,"maskType":w,"textDecorationStyle":wm,"textDecorationSkip":wm,"textDecorationLine":wm,"textDecorationColor":wm,"filter":w,"fontFeatureSettings":wm,"breakAfter":wmms,"breakBefore":wmms,"breakInside":wmms,"columnCount":wm,"columnFill":wm,"columnGap":wm,"columnRule":wm,"columnRuleColor":wm,"columnRuleStyle":wm,"columnRuleWidth":wm,"columns":wm,"columnSpan":wm,"columnWidth":wm,"flex":wms,"flexBasis":w,"flexDirection":wms,"flexGrow":w,"flexFlow":wms,"flexShrink":w,"flexWrap":wms,"alignContent":w,"alignItems":w,"alignSelf":w,"justifyContent":w,"order":w,"transitionDelay":w,"transitionDuration":w,"transitionProperty":w,"transitionTimingFunction":w,"backdropFilter":w,"scrollSnapType":wms,"scrollSnapPointsX":wms,"scrollSnapPointsY":wms,"scrollSnapDestination":wms,"scrollSnapCoordinate":wms,"shapeImageThreshold":w,"shapeImageMargin":w,"shapeImageOutside":w,"hyphens":wmms,"flowInto":wms,"flowFrom":wms,"regionFragment":wms,"boxSizing":m,"textAlignLast":m,"tabSize":m,"wrapFlow":ms,"wrapThrough":ms,"wrapMargin":ms,"touchAction":ms,"gridTemplateColumns":ms,"gridTemplateRows":ms,"gridTemplateAreas":ms,"gridTemplate":ms,"gridAutoColumns":ms,"gridAutoRows":ms,"gridAutoFlow":ms,"grid":ms,"gridRowStart":ms,"gridColumnStart":ms,"gridRowEnd":ms,"gridRow":ms,"gridColumn":ms,"gridColumnEnd":ms,"gridColumnGap":ms,"gridRowGap":ms,"gridArea":ms,"gridGap":ms,"textSizeAdjust":wms,"borderImage":w,"borderImageOutset":w,"borderImageRepeat":w,"borderImageSlice":w,"borderImageSource":w,"borderImageWidth":w}
 	}
 
 /***/ }),
@@ -641,18 +647,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = calc;
-
+	
 	var _isPrefixedValue = __webpack_require__(11);
-
+	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	var prefixes = ['-webkit-', '-moz-', ''];
 	function calc(property, value) {
 	  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && value.indexOf('calc(') > -1) {
@@ -668,14 +674,14 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = isPrefixedValue;
-
+	
 	var regex = /-webkit-|-moz-|-ms-/;
-
+	
 	function isPrefixedValue(value) {
 	  return typeof value === 'string' && regex.test(value);
 	}
@@ -686,18 +692,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = crossFade;
-
+	
 	var _isPrefixedValue = __webpack_require__(11);
-
+	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	// http://caniuse.com/#search=cross-fade
 	var prefixes = ['-webkit-', ''];
 	function crossFade(property, value) {
@@ -714,20 +720,20 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = cursor;
 	var prefixes = ['-webkit-', '-moz-', ''];
-
+	
 	var values = {
 	  'zoom-in': true,
 	  'zoom-out': true,
 	  grab: true,
 	  grabbing: true
 	};
-
+	
 	function cursor(property, value) {
 	  if (property === 'cursor' && values.hasOwnProperty(value)) {
 	    return prefixes.map(function (prefix) {
@@ -742,18 +748,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = filter;
-
+	
 	var _isPrefixedValue = __webpack_require__(11);
-
+	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	// http://caniuse.com/#feat=css-filter-function
 	var prefixes = ['-webkit-', ''];
 	function filter(property, value) {
@@ -770,7 +776,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -779,7 +785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  flex: true,
 	  'inline-flex': true
 	};
-
+	
 	function flex(property, value) {
 	  if (property === 'display' && values.hasOwnProperty(value)) {
 	    return ['-webkit-box', '-moz-box', '-ms-' + value + 'box', '-webkit-' + value, value];
@@ -792,7 +798,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -813,7 +819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  flexShrink: 'msFlexNegative',
 	  flexBasis: 'msPreferredSize'
 	};
-
+	
 	function flexboxIE(property, value, style) {
 	  if (alternativeProps.hasOwnProperty(property)) {
 	    style[alternativeProps[property]] = alternativeValues[value] || value;
@@ -826,7 +832,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -839,13 +845,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  'wrap-reverse': 'multiple',
 	  wrap: 'multiple'
 	};
-
+	
 	var alternativeProps = {
 	  alignItems: 'WebkitBoxAlign',
 	  justifyContent: 'WebkitBoxPack',
 	  flexWrap: 'WebkitBoxLines'
 	};
-
+	
 	function flexboxOld(property, value, style) {
 	  if (property === 'flexDirection' && typeof value === 'string') {
 	    if (value.indexOf('column') > -1) {
@@ -870,22 +876,22 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = gradient;
-
+	
 	var _isPrefixedValue = __webpack_require__(11);
-
+	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	var prefixes = ['-webkit-', '-moz-', ''];
-
+	
 	var values = /linear-gradient|radial-gradient|repeating-linear-gradient|repeating-radial-gradient/;
-
+	
 	function gradient(property, value) {
 	  if (typeof value === 'string' && !(0, _isPrefixedValue2.default)(value) && values.test(value)) {
 	    return prefixes.map(function (prefix) {
@@ -900,18 +906,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = imageSet;
-
+	
 	var _isPrefixedValue = __webpack_require__(11);
-
+	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	// http://caniuse.com/#feat=css-image-set
 	var prefixes = ['-webkit-', ''];
 	function imageSet(property, value) {
@@ -928,7 +934,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -945,13 +951,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = sizing;
 	var prefixes = ['-webkit-', '-moz-', ''];
-
+	
 	var properties = {
 	  maxHeight: true,
 	  maxWidth: true,
@@ -968,7 +974,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  'fit-content': true,
 	  'contain-floats': true
 	};
-
+	
 	function sizing(property, value) {
 	  if (properties.hasOwnProperty(property) && values.hasOwnProperty(value)) {
 	    return prefixes.map(function (prefix) {
@@ -983,26 +989,26 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = transition;
-
+	
 	var _hyphenateProperty = __webpack_require__(23);
-
+	
 	var _hyphenateProperty2 = _interopRequireDefault(_hyphenateProperty);
-
+	
 	var _isPrefixedValue = __webpack_require__(11);
-
+	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
-
+	
 	var _capitalizeString = __webpack_require__(5);
-
+	
 	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	var properties = {
 	  transition: true,
 	  transitionProperty: true,
@@ -1011,28 +1017,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	  MozTransition: true,
 	  MozTransitionProperty: true
 	};
-
-
+	
+	
 	var prefixMapping = {
 	  Webkit: '-webkit-',
 	  Moz: '-moz-',
 	  ms: '-ms-'
 	};
-
+	
 	function prefixValue(value, propertyPrefixMap) {
 	  if ((0, _isPrefixedValue2.default)(value)) {
 	    return value;
 	  }
-
+	
 	  // only split multi values, not cubic beziers
 	  var multipleValues = value.split(/,(?![^()]*(?:\([^()]*\))?\))/g);
-
+	
 	  for (var i = 0, len = multipleValues.length; i < len; ++i) {
 	    var singleValue = multipleValues[i];
 	    var values = [singleValue];
 	    for (var property in propertyPrefixMap) {
 	      var dashCaseProperty = (0, _hyphenateProperty2.default)(property);
-
+	
 	      if (singleValue.indexOf(dashCaseProperty) > -1 && dashCaseProperty !== 'order') {
 	        var prefixes = propertyPrefixMap[property];
 	        for (var j = 0, pLen = prefixes.length; j < pLen; ++j) {
@@ -1041,13 +1047,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      }
 	    }
-
+	
 	    multipleValues[i] = values.join(',');
 	  }
-
+	
 	  return multipleValues.join(',');
 	}
-
+	
 	function transition(property, value, style, propertyPrefixMap) {
 	  // also check for already prefixed transitions
 	  if (typeof value === 'string' && properties.hasOwnProperty(property)) {
@@ -1056,19 +1062,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var webkitOutput = outputValue.split(/,(?![^()]*(?:\([^()]*\))?\))/g).filter(function (val) {
 	      return !/-moz-|-ms-/.test(val);
 	    }).join(',');
-
+	
 	    if (property.indexOf('Webkit') > -1) {
 	      return webkitOutput;
 	    }
-
+	
 	    var mozOutput = outputValue.split(/,(?![^()]*(?:\([^()]*\))?\))/g).filter(function (val) {
 	      return !/-webkit-|-ms-/.test(val);
 	    }).join(',');
-
+	
 	    if (property.indexOf('Moz') > -1) {
 	      return mozOutput;
 	    }
-
+	
 	    style['Webkit' + (0, _capitalizeString2.default)(property)] = webkitOutput;
 	    style['Moz' + (0, _capitalizeString2.default)(property)] = mozOutput;
 	    return outputValue;
@@ -1081,18 +1087,18 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.default = hyphenateProperty;
-
+	
 	var _hyphenateStyleName = __webpack_require__(24);
-
+	
 	var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	function hyphenateProperty(property) {
 	  return (0, _hyphenateStyleName2.default)(property);
 	}
@@ -1103,11 +1109,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	'use strict';
-
+	
 	var uppercasePattern = /[A-Z]/g;
 	var msPattern = /^ms-/;
 	var cache = {};
-
+	
 	function hyphenateStyleName(string) {
 	    return string in cache
 	    ? cache[string]
@@ -1116,7 +1122,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      .toLowerCase()
 	      .replace(msPattern, '-ms-');
 	}
-
+	
 	module.exports = hyphenateStyleName;
 
 
@@ -1125,30 +1131,30 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
-
+	
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
+	
 	var MAP_EXISTS = typeof Map !== 'undefined';
-
+	
 	var OrderedElements = (function () {
 	    /* ::
 	    elements: {[string]: any};
 	    keyOrder: string[];
 	    */
-
+	
 	    function OrderedElements() {
 	        _classCallCheck(this, OrderedElements);
-
+	
 	        this.elements = {};
 	        this.keyOrder = [];
 	    }
-
+	
 	    _createClass(OrderedElements, [{
 	        key: 'forEach',
 	        value: function forEach(callback /* : (string, any) => void */) {
@@ -1161,16 +1167,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'set',
 	        value: function set(key, /* : string */value /* : any */) {
 	            var _this = this;
-
+	
 	            if (!this.elements.hasOwnProperty(key)) {
 	                this.keyOrder.push(key);
 	            }
-
+	
 	            if (value == null) {
 	                this.elements[key] = value;
 	                return;
 	            }
-
+	
 	            if (MAP_EXISTS && value instanceof Map || value instanceof OrderedElements) {
 	                var _ret = (function () {
 	                    // We have found a nested Map, so we need to recurse so that all
@@ -1184,10 +1190,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        v: undefined
 	                    };
 	                })();
-
+	
 	                if (typeof _ret === 'object') return _ret.v;
 	            }
-
+	
 	            if (!Array.isArray(value) && typeof value === 'object') {
 	                // We have found a nested object, so we need to recurse so that all
 	                // of the nested objects and Maps are merged properly.
@@ -1199,7 +1205,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                this.elements[key] = nested;
 	                return;
 	            }
-
+	
 	            this.elements[key] = value;
 	        }
 	    }, {
@@ -1216,7 +1222,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        key: 'addStyleType',
 	        value: function addStyleType(styleType /* : any */) /* : void */{
 	            var _this2 = this;
-
+	
 	            if (MAP_EXISTS && styleType instanceof Map || styleType instanceof OrderedElements) {
 	                styleType.forEach(function (value, key) {
 	                    _this2.set(key, value);
@@ -1229,10 +1235,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	        }
 	    }]);
-
+	
 	    return OrderedElements;
 	})();
-
+	
 	exports['default'] = OrderedElements;
 	module.exports = exports['default'];
 
@@ -1241,26 +1247,26 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
-
+	
 	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
+	
 	var _stringHash = __webpack_require__(27);
-
+	
 	var _stringHash2 = _interopRequireDefault(_stringHash);
-
+	
 	/* ::
 	type Pair = [ string, any ];
 	type Pairs = Pair[];
 	type PairsMapper = (pair: Pair) => Pair;
 	type ObjectMap = { [id:string]: any };
 	*/
-
+	
 	var mapObj = function mapObj(obj, /* : ObjectMap */
 	fn /* : PairsMapper */
 	) /* : ObjectMap */{
@@ -1268,24 +1274,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var mappedObj = {};
 	    for (var i = 0; i < keys.length; i += 1) {
 	        var _fn = fn([keys[i], obj[keys[i]]]);
-
+	
 	        var _fn2 = _slicedToArray(_fn, 2);
-
+	
 	        var newKey = _fn2[0];
 	        var newValue = _fn2[1];
-
+	
 	        mappedObj[newKey] = newValue;
 	    }
 	    return mappedObj;
 	};
-
+	
 	exports.mapObj = mapObj;
 	var UPPERCASE_RE = /([A-Z])/g;
 	var UPPERCASE_RE_TO_KEBAB = function UPPERCASE_RE_TO_KEBAB(match /* : string */) {
 	    return (/* : string */'-' + match.toLowerCase()
 	    );
 	};
-
+	
 	var kebabifyStyleName = function kebabifyStyleName(string /* : string */) /* : string */{
 	    var result = string.replace(UPPERCASE_RE, UPPERCASE_RE_TO_KEBAB);
 	    if (result[0] === 'm' && result[1] === 's' && result[2] === '-') {
@@ -1293,7 +1299,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    return result;
 	};
-
+	
 	exports.kebabifyStyleName = kebabifyStyleName;
 	/**
 	 * CSS properties which accept numbers but are not in units of "px".
@@ -1326,7 +1332,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    widows: true,
 	    zIndex: true,
 	    zoom: true,
-
+	
 	    // SVG-related properties
 	    fillOpacity: true,
 	    floodOpacity: true,
@@ -1337,7 +1343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    strokeOpacity: true,
 	    strokeWidth: true
 	};
-
+	
 	/**
 	 * Taken from React's CSSProperty.js
 	 *
@@ -1349,14 +1355,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	function prefixKey(prefix, key) {
 	    return prefix + key.charAt(0).toUpperCase() + key.substring(1);
 	}
-
+	
 	/**
 	 * Support style names that may come passed in prefixed by adding permutations
 	 * of vendor prefixes.
 	 * Taken from React's CSSProperty.js
 	 */
 	var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
-
+	
 	// Using Object.keys here, or else the vanilla for-in loop makes IE8 go into an
 	// infinite loop, because it iterates over the newly added props too.
 	// Taken from React's CSSProperty.js
@@ -1365,7 +1371,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        isUnitlessNumber[prefixKey(prefix, prop)] = isUnitlessNumber[prop];
 	    });
 	});
-
+	
 	var stringifyValue = function stringifyValue(key, /* : string */
 	prop /* : any */
 	) /* : string */{
@@ -1379,7 +1385,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return '' + prop;
 	    }
 	};
-
+	
 	exports.stringifyValue = stringifyValue;
 	var stringifyAndImportantifyValue = function stringifyAndImportantifyValue(key, /* : string */
 	prop /* : any */
@@ -1387,7 +1393,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return (/* : string */importantify(stringifyValue(key, prop))
 	    );
 	};
-
+	
 	exports.stringifyAndImportantifyValue = stringifyAndImportantifyValue;
 	// Hash a javascript object using JSON.stringify. This is very fast, about 3
 	// microseconds on my computer for a sample object:
@@ -1401,7 +1407,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return (/* : string */(0, _stringHash2['default'])(JSON.stringify(object)).toString(36)
 	    );
 	};
-
+	
 	exports.hashObject = hashObject;
 	// Given a single style value string like the "b" from "a: b;", adds !important
 	// to generate "b !important".
@@ -1421,21 +1427,21 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	"use strict";
-
+	
 	function hash(str) {
 	  var hash = 5381,
 	      i    = str.length;
-
+	
 	  while(i) {
 	    hash = (hash * 33) ^ str.charCodeAt(--i);
 	  }
-
+	
 	  /* JavaScript does bitwise operations (like XOR, above) on 32-bit signed
 	   * integers. Since we want the results to be always positive, convert the
 	   * signed int to an unsigned by doing an unsigned bitshift. */
 	  return hash >>> 0;
 	}
-
+	
 	module.exports = hash;
 
 
@@ -1444,15 +1450,15 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
-
+	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
+	
 	var _util = __webpack_require__(26);
-
+	
 	var _inject = __webpack_require__(29);
-
+	
 	/* ::
 	import type { SelectorHandler } from './generate.js';
 	export type SheetDefinition = { [id:string]: any };
@@ -1463,15 +1469,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	export type MaybeSheetDefinition = SheetDefinition | false | null | void
 	*/
-
+	
 	var StyleSheet = {
 	    create: function create(sheetDefinition /* : SheetDefinition */) {
 	        return (0, _util.mapObj)(sheetDefinition, function (_ref) {
 	            var _ref2 = _slicedToArray(_ref, 2);
-
+	
 	            var key = _ref2[0];
 	            var val = _ref2[1];
-
+	
 	            return [key, {
 	                // TODO(emily): Make a 'production' mode which doesn't prepend
 	                // the class name here, to make the generated CSS smaller.
@@ -1480,14 +1486,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }];
 	        });
 	    },
-
+	
 	    rehydrate: function rehydrate() {
 	        var renderedClassNames /* : string[] */ = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-
+	
 	        (0, _inject.addRenderedClassNames)(renderedClassNames);
 	    }
 	};
-
+	
 	/**
 	 * Utilities for using Aphrodite server-side.
 	 */
@@ -1497,7 +1503,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        (0, _inject.startBuffering)();
 	        var html = renderFunc();
 	        var cssContent = (0, _inject.flushToString)();
-
+	
 	        return {
 	            html: html,
 	            css: {
@@ -1507,7 +1513,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        };
 	    }
 	};
-
+	
 	/**
 	 * Utilities for using Aphrodite in tests.
 	 *
@@ -1529,7 +1535,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        (0, _inject.reset)();
 	        (0, _inject.startBuffering)();
 	    },
-
+	
 	    /**
 	     * Opposite method of preventStyleInject.
 	     */
@@ -1537,7 +1543,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        (0, _inject.reset)();
 	    }
 	};
-
+	
 	/**
 	 * Generate the Aphrodite API exports, with given `selectorHandlers` and
 	 * `useImportant` state.
@@ -1547,7 +1553,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	) {
 	    return {
 	        StyleSheet: _extends({}, StyleSheet, {
-
+	
 	            /**
 	             * Returns a version of the exports of Aphrodite (i.e. an object
 	             * with `css` and `StyleSheet` properties) which have some
@@ -1575,24 +1581,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	                .filter(function (handler) {
 	                    return handler;
 	                });
-
+	
 	                return makeExports(useImportant, selectorHandlers.concat(extensionSelectorHandlers));
 	            }
 	        }),
-
+	
 	        StyleSheetServer: StyleSheetServer,
 	        StyleSheetTestUtils: StyleSheetTestUtils,
-
+	
 	        css: function css() /* : MaybeSheetDefinition[] */{
 	            for (var _len = arguments.length, styleDefinitions = Array(_len), _key = 0; _key < _len; _key++) {
 	                styleDefinitions[_key] = arguments[_key];
 	            }
-
+	
 	            return (0, _inject.injectAndGetClassName)(useImportant, styleDefinitions, selectorHandlers);
 	        }
 	    };
 	};
-
+	
 	module.exports = makeExports;
 
 /***/ }),
@@ -1600,25 +1606,25 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
+	
 	var _asap = __webpack_require__(30);
-
+	
 	var _asap2 = _interopRequireDefault(_asap);
-
+	
 	var _orderedElements = __webpack_require__(25);
-
+	
 	var _orderedElements2 = _interopRequireDefault(_orderedElements);
-
+	
 	var _generate = __webpack_require__(2);
-
+	
 	var _util = __webpack_require__(26);
-
+	
 	/* ::
 	import type { SheetDefinition, SheetDefinitions } from './index.js';
 	import type { MaybeSheetDefinition } from './exports.js';
@@ -1628,13 +1634,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  definitionBits: Array<Object>,
 	};
 	*/
-
+	
 	// The current <style> tag we are inserting into, or null if we haven't
 	// inserted anything yet. We could find this each time using
 	// `document.querySelector("style[data-aphrodite"])`, but holding onto it is
 	// faster.
 	var styleTag = null;
-
+	
 	// Inject a string of styles into a <style> tag in the head of the document. This
 	// will automatically create a style tag and then continue to use it for
 	// multiple injections. It will also use a style tag with the `data-aphrodite`
@@ -1644,20 +1650,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (styleTag == null) {
 	        // Try to find a style tag with the `data-aphrodite` attribute first.
 	        styleTag = document.querySelector("style[amp-custom]");
-
+	
 	        // If that doesn't work, generate a new style tag.
 	        if (styleTag == null) {
 	            // Taken from
 	            // http://stackoverflow.com/questions/524696/how-to-create-a-style-tag-with-javascript
 	            var head = document.head || document.getElementsByTagName('head')[0];
 	            styleTag = document.createElement('style');
-
+	
 	            styleTag.type = 'text/css';
 	            styleTag.setAttribute("amp-custom", "");
 	            head.appendChild(styleTag);
 	        }
 	    }
-
+	
 	    if (styleTag.styleSheet) {
 	        // $FlowFixMe: legacy Internet Explorer compatibility
 	        styleTag.styleSheet.cssText += cssContents;
@@ -1665,7 +1671,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        styleTag.appendChild(document.createTextNode(cssContents));
 	    }
 	};
-
+	
 	// Custom handlers for stringifying CSS values that have side effects
 	// (such as fontFamily, which can cause @font-face rules to be injected)
 	var stringHandlers = {
@@ -1683,7 +1689,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return val;
 	        }
 	    },
-
+	
 	    // With animationName we look for an object that contains keyframes and
 	    // inject them as an `@keyframes` block, returning a uniquely generated
 	    // name. The keyframes object should look like
@@ -1715,11 +1721,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	            // TODO(emily): this probably makes debugging hard, allow a custom
 	            // name?
 	            var _name = 'keyframe_' + (0, _util.hashObject)(val);
-
+	
 	            // Since keyframes need 3 layers of nesting, we use `generateCSS` to
 	            // build the inner layers and wrap it in `@keyframes` ourselves.
 	            var finalVal = '@keyframes ' + _name + '{';
-
+	
 	            // TODO see if we can find a way where checking for OrderedElements
 	            // here is not necessary. Alternatively, perhaps we should have a
 	            // utility method that can iterate over either a plain object, an
@@ -1735,66 +1741,66 @@ return /******/ (function(modules) { // webpackBootstrap
 	                });
 	            }
 	            finalVal += '}';
-
+	
 	            injectGeneratedCSSOnce(_name, finalVal);
-
+	
 	            return _name;
 	        } else {
 	            return val;
 	        }
 	    }
 	};
-
+	
 	// This is a map from Aphrodite's generated class names to `true` (acting as a
 	// set of class names)
 	var alreadyInjected = {};
-
+	
 	// This is the buffer of styles which have not yet been flushed.
 	var injectionBuffer = "";
-
+	
 	// A flag to tell if we are already buffering styles. This could happen either
 	// because we scheduled a flush call already, so newly added styles will
 	// already be flushed, or because we are statically buffering on the server.
 	var isBuffering = false;
-
+	
 	var injectGeneratedCSSOnce = function injectGeneratedCSSOnce(key, generatedCSS) {
 	    if (alreadyInjected[key]) {
 	        return;
 	    }
-
+	
 	    if (!isBuffering) {
 	        // We should never be automatically buffering on the server (or any
 	        // place without a document), so guard against that.
 	        if (typeof document === "undefined") {
 	            throw new Error("Cannot automatically buffer without a document");
 	        }
-
+	
 	        // If we're not already buffering, schedule a call to flush the
 	        // current styles.
 	        isBuffering = true;
 	        (0, _asap2['default'])(flushToStyleTag);
 	    }
-
+	
 	    injectionBuffer += generatedCSS;
 	    alreadyInjected[key] = true;
 	};
-
+	
 	var injectStyleOnce = function injectStyleOnce(key, /* : string */
 	selector, /* : string */
 	definitions, /* : SheetDefinition[] */
 	useImportant /* : boolean */
 	) {
 	    var selectorHandlers /* : SelectorHandler[] */ = arguments.length <= 4 || arguments[4] === undefined ? [] : arguments[4];
-
+	
 	    if (alreadyInjected[key]) {
 	        return;
 	    }
-
+	
 	    var generated = (0, _generate.generateCSS)(selector, definitions, selectorHandlers, stringHandlers, useImportant);
-
+	
 	    injectGeneratedCSSOnce(key, generated);
 	};
-
+	
 	exports.injectStyleOnce = injectStyleOnce;
 	var reset = function reset() {
 	    injectionBuffer = "";
@@ -1802,7 +1808,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    isBuffering = false;
 	    styleTag = null;
 	};
-
+	
 	exports.reset = reset;
 	var startBuffering = function startBuffering() {
 	    if (isBuffering) {
@@ -1810,7 +1816,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    isBuffering = true;
 	};
-
+	
 	exports.startBuffering = startBuffering;
 	var flushToString = function flushToString() {
 	    isBuffering = false;
@@ -1818,7 +1824,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    injectionBuffer = "";
 	    return ret;
 	};
-
+	
 	exports.flushToString = flushToString;
 	var flushToStyleTag = function flushToStyleTag() {
 	    var cssContent = flushToString();
@@ -1826,19 +1832,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	        injectStyleTag(cssContent);
 	    }
 	};
-
+	
 	exports.flushToStyleTag = flushToStyleTag;
 	var getRenderedClassNames = function getRenderedClassNames() {
 	    return Object.keys(alreadyInjected);
 	};
-
+	
 	exports.getRenderedClassNames = getRenderedClassNames;
 	var addRenderedClassNames = function addRenderedClassNames(classNames /* : string[] */) {
 	    classNames.forEach(function (className) {
 	        alreadyInjected[className] = true;
 	    });
 	};
-
+	
 	exports.addRenderedClassNames = addRenderedClassNames;
 	var processStyleDefinitions = function processStyleDefinitions(styleDefinitions, /* : any[] */
 	result /* : ProcessedStyleDefinitions */
@@ -1857,7 +1863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }
 	};
-
+	
 	/**
 	 * Inject styles associated with the passed style definition objects, and return
 	 * an associated CSS class name.
@@ -1878,15 +1884,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	    // Mutates processedStyleDefinitions
 	    processStyleDefinitions(styleDefinitions, processedStyleDefinitions);
-
+	
 	    // Break if there aren't any valid styles.
 	    if (processedStyleDefinitions.classNameBits.length === 0) {
 	        return "";
 	    }
 	    var className = processedStyleDefinitions.classNameBits.join("-o_O-");
-
+	
 	    injectStyleOnce(className, '.' + className, processedStyleDefinitions.definitionBits, useImportant, selectorHandlers);
-
+	
 	    return className;
 	};
 	exports.injectAndGetClassName = injectAndGetClassName;
@@ -1896,7 +1902,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
-
+	
 	// rawAsap provides everything we need except exception management.
 	var rawAsap = __webpack_require__(31);
 	// RawTasks are recycled to reduce GC churn.
@@ -1905,13 +1911,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Array-as-queue is good enough here, since we are just dealing with exceptions.
 	var pendingErrors = [];
 	var requestErrorThrow = rawAsap.makeRequestCallFromTimer(throwFirstError);
-
+	
 	function throwFirstError() {
 	    if (pendingErrors.length) {
 	        throw pendingErrors.shift();
 	    }
 	}
-
+	
 	/**
 	 * Calls a task as soon as possible after returning, in its own event, with priority
 	 * over other events like animation, reflow, and repaint. An error thrown from an
@@ -1931,13 +1937,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    rawTask.task = task;
 	    rawAsap(rawTask);
 	}
-
+	
 	// We wrap tasks with recyclable task objects.  A task object implements
 	// `call`, just like a function.
 	function RawTask() {
 	    this.task = null;
 	}
-
+	
 	// The sole purpose of wrapping the task is to catch the exception and recycle
 	// the task object after its single use.
 	RawTask.prototype.call = function () {
@@ -1968,7 +1974,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
-
+	
 	// Use the fastest means possible to execute a task in its own turn, with
 	// priority over other events including IO, animation, reflow, and redraw
 	// events in browsers.
@@ -1988,7 +1994,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Equivalent to push, but avoids a function call.
 	    queue[queue.length] = task;
 	}
-
+	
 	var queue = [];
 	// Once a flush has been requested, no further calls to `requestFlush` are
 	// necessary until the next `flush` completes.
@@ -2005,7 +2011,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// unbounded. To prevent memory exhaustion, the task queue will periodically
 	// truncate already-completed tasks.
 	var capacity = 1024;
-
+	
 	// The flush function processes all tasks that have been scheduled with
 	// `rawAsap` unless and until one of those tasks throws an exception.
 	// If a task throws an exception, `flush` ensures that its state will remain
@@ -2038,20 +2044,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    index = 0;
 	    flushing = false;
 	}
-
+	
 	// `requestFlush` is implemented using a strategy based on data collected from
 	// every available SauceLabs Selenium web driver worker at time of writing.
 	// https://docs.google.com/spreadsheets/d/1mG-5UYGup5qxGdEMWkhP6BWCz053NUb2E1QoUTU16uA/edit#gid=783724593
-
+	
 	// Safari 6 and 6.1 for desktop, iPad, and iPhone are the only browsers that
 	// have WebKitMutationObserver but not un-prefixed MutationObserver.
 	// Must use `global` or `self` instead of `window` to work in both frames and web
 	// workers. `global` is a provision of Browserify, Mr, Mrs, or Mop.
-
+	
 	/* globals self */
 	var scope = typeof global !== "undefined" ? global : self;
 	var BrowserMutationObserver = scope.MutationObserver || scope.WebKitMutationObserver;
-
+	
 	// MutationObservers are desirable because they have high priority and work
 	// reliably everywhere they are implemented.
 	// They are implemented in all modern browsers.
@@ -2065,14 +2071,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	// - Safari 6-7
 	if (typeof BrowserMutationObserver === "function") {
 	    requestFlush = makeRequestCallFromMutationObserver(flush);
-
+	
 	// MessageChannels are desirable because they give direct access to the HTML
 	// task queue, are implemented in Internet Explorer 10, Safari 5.0-1, and Opera
 	// 11-12, and in web workers in many engines.
 	// Although message channels yield to any queued rendering and IO tasks, they
 	// would be better than imposing the 4ms delay of timers.
 	// However, they do not work reliably in Internet Explorer or Safari.
-
+	
 	// Internet Explorer 10 is the only browser that has setImmediate but does
 	// not have MutationObservers.
 	// Although setImmediate yields to the browser's renderer, it would be
@@ -2082,7 +2088,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Desktop to a lesser extent) that renders both setImmediate and
 	// MessageChannel useless for the purposes of ASAP.
 	// https://github.com/kriskowal/q/issues/396
-
+	
 	// Timers are implemented universally.
 	// We fall back to timers in workers in most engines, and in foreground
 	// contexts in the following browsers.
@@ -2096,14 +2102,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	} else {
 	    requestFlush = makeRequestCallFromTimer(flush);
 	}
-
+	
 	// `requestFlush` requests that the high priority event queue be flushed as
 	// soon as possible.
 	// This is useful to prevent an error thrown in a task from stalling the event
 	// queue if the exception handled by Node.js’s
 	// `process.on("uncaughtException")` or by a domain.
 	rawAsap.requestFlush = requestFlush;
-
+	
 	// To request a high priority event, we induce a mutation observer by toggling
 	// the text of a text node between "1" and "-1".
 	function makeRequestCallFromMutationObserver(callback) {
@@ -2116,15 +2122,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        node.data = toggle;
 	    };
 	}
-
+	
 	// The message channel technique was discovered by Malte Ubl and was the
 	// original foundation for this library.
 	// http://www.nonblocking.io/2011/06/windownexttick.html
-
+	
 	// Safari 6.0.5 (at least) intermittently fails to create message ports on a
 	// page's first load. Thankfully, this version of Safari supports
 	// MutationObservers, so we don't need to fall back in that case.
-
+	
 	// function makeRequestCallFromMessageChannel(callback) {
 	//     var channel = new MessageChannel();
 	//     channel.port1.onmessage = callback;
@@ -2132,7 +2138,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//         channel.port2.postMessage(0);
 	//     };
 	// }
-
+	
 	// For reasons explained above, we are also unable to use `setImmediate`
 	// under any circumstances.
 	// Even if we were, there is another bug in Internet Explorer 10.
@@ -2140,23 +2146,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	// `setImmediate` must be called *by name* and therefore must be wrapped in a
 	// closure.
 	// Never forget.
-
+	
 	// function makeRequestCallFromSetImmediate(callback) {
 	//     return function requestCall() {
 	//         setImmediate(callback);
 	//     };
 	// }
-
+	
 	// Safari 6.0 has a problem where timers will get lost while the user is
 	// scrolling. This problem does not impact ASAP because Safari 6.0 supports
 	// mutation observers, so that implementation is used instead.
 	// However, if we ever elect to use timers in Safari, the prevalent work-around
 	// is to add a scroll event listener that calls for a flush.
-
+	
 	// `setTimeout` does not call the passed callback if the delay is less than
 	// approximately 7 in web workers in Firefox 8 through 18, and sometimes not
 	// even then.
-
+	
 	function makeRequestCallFromTimer(callback) {
 	    return function requestCall() {
 	        // We dispatch a timeout with a specified delay of 0 for engines that
@@ -2168,7 +2174,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // workers, we enlist an interval handle that will try to fire
 	        // an event 20 times per second until it succeeds.
 	        var intervalHandle = setInterval(handleTimer, 50);
-
+	
 	        function handleTimer() {
 	            // Whichever timer succeeds will cancel both timers and
 	            // execute the callback.
@@ -2178,19 +2184,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    };
 	}
-
+	
 	// This is for `asap.js` only.
 	// Its name will be periodically randomized to break any code that depends on
 	// its existence.
 	rawAsap.makeRequestCallFromTimer = makeRequestCallFromTimer;
-
+	
 	// ASAP was originally a nextTick shim included in Q. This was factored out
 	// into this ASAP package. It was later adapted to RSVP which made further
 	// amendments. These decisions, particularly to marginalize MessageChannel and
 	// to capture the MutationObserver implementation in a closure, were integrated
 	// back into ASAP proper.
 	// https://github.com/tildeio/rsvp.js/blob/cddf7232546a9cf858524b75cde6f9edf72620a7/lib/rsvp/asap.js
-
+	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ })
