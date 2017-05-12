@@ -1,12 +1,12 @@
 {
   "name": "aphrodite-amp",
-  "version": "1.1.1",
+  "version": "1.3.2",
   "description": "Inline styles in JS that just work (TM)",
   "keywords": [
     "css",
     "react",
-    "inline-styles"
-    "amp"
+    "inline-styles",
+    "amp",
     "google-amp"
   ],
   "main": "lib/index.js",
