@@ -1634,7 +1634,7 @@ module.exports =
 	var injectStyleTag = function injectStyleTag(cssContents /* : string */) {
 	    if (styleTag == null) {
 	        // Try to find a style tag with the `data-aphrodite` attribute first.
-	        styleTag = document.querySelector("style[data-aphrodite]");
+	        styleTag = document.querySelector("style[amp-custom]");
 
 	        // If that doesn't work, generate a new style tag.
 	        if (styleTag == null) {
@@ -1644,7 +1644,7 @@ module.exports =
 	            styleTag = document.createElement('style');
 
 	            styleTag.type = 'text/css';
-	            styleTag.setAttribute("data-aphrodite", "");
+	            styleTag.setAttribute("amp-custom", "");
 	            head.appendChild(styleTag);
 	        }
 	    }
